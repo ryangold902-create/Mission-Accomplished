@@ -1,0 +1,114 @@
+/* PDF p.14 (lower band) — restrained navy footer with the mountain system. */
+.footer {
+  position: relative;
+  background: var(--color-navy);
+  color: var(--color-on-navy);
+  overflow: clip;
+  isolation: isolate;
+}
+.range {
+  position: absolute;
+  right: 0;
+  bottom: 34%;
+  z-index: 0;
+  width: min(74%, 900px);
+  height: auto;
+  pointer-events: none;
+}
+.inner {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(34px, 3.2vw, 46px) clamp(16px, 1.6vw, 22px);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(28px, 6vw, 96px);
+}
+.brand img {
+  width: 118px;
+  height: auto;
+  margin-bottom: var(--s-3);
+}
+.tagline {
+  font-size: var(--step-small);
+  line-height: 1.5;
+  color: var(--color-on-navy-muted);
+  max-width: 15rem;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(18px, 2.6vw, 40px);
+  padding-top: var(--s-2);
+}
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--color-on-navy);
+  transition: color var(--dur) var(--ease);
+}
+.navLink:hover {
+  color: var(--color-orange-on-navy);
+}
+.navCta {
+  color: var(--color-orange-on-navy);
+  font-weight: 600;
+}
+.navCta:hover {
+  color: #ffb184;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+  margin-top: clamp(22px, 2.4vw, 32px);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--color-border-navy);
+}
+.copyright {
+  font-size: var(--step-small);
+  color: var(--color-on-navy-muted);
+}
+.legal {
+  display: flex;
+  gap: clamp(16px, 2.4vw, 34px);
+  flex-wrap: wrap;
+}
+.legalLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--step-small);
+  color: var(--color-on-navy-muted);
+  transition: color var(--dur) var(--ease);
+}
+.legalLink:hover {
+  color: var(--color-on-navy);
+}
+
+@media (max-width: 860px) {
+  .top {
+    flex-direction: column;
+    gap: var(--s-7);
+  }
+  .range {
+    width: 130%;
+    right: -14%;
+    bottom: 30%;
+    opacity: 0.7;
+  }
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,153 @@
+/* Kids reference 02 — one example mission beside a live product preview. V3.1:
+   flat warm cream, no mountain photograph — the repeated mountain plate used
+   to sit behind four of the five Kids sections, and section 4 (the journey
+   dashboard) is now the page's one full-mountain moment instead. */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: var(--section-y);
+}
+
+.grid {
+  display: grid;
+  /* Preview is the section's product read — give it the wider column so the
+     challenge sheet isn't floating in cream. Left still fits the heading +
+     breakdown at its own max-width. */
+  grid-template-columns: minmax(0, 36fr) minmax(0, 64fr);
+  gap: clamp(20px, 2.2vw, 40px);
+  align-items: center;
+}
+.left {
+  min-width: 0;
+}
+.left h2 {
+  margin-bottom: var(--s-5);
+}
+.support {
+  max-width: 26rem;
+  margin-bottom: var(--s-8);
+}
+
+/* ------------------------------------------------------ example breakdown */
+.breakdown {
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border-soft);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
+  padding: clamp(var(--s-6), 2.4vw, var(--s-8));
+  max-width: 28rem;
+}
+.breakdownHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  margin-bottom: var(--s-6);
+  padding-bottom: var(--s-5);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+.breakdownArt {
+  width: clamp(52px, 5vw, 72px);
+  height: auto;
+  flex: none;
+  object-fit: contain;
+  /* Same stock-clipart chroma pull as the old card rule — delete when redrawn. */
+  filter: saturate(0.65);
+}
+.breakdownTitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.25rem, 1.05rem + 0.55vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-navy);
+}
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+  font-size: var(--step-body);
+  line-height: 1.45;
+  color: var(--color-text);
+}
+.stepNum {
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-orange) 14%, var(--color-white));
+  border: 1px solid color-mix(in srgb, var(--color-orange) 35%, transparent);
+  font-family: var(--font-sans);
+  font-size: var(--step-small);
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1;
+}
+
+/* ---------------------------------------------------------- the preview */
+.preview {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.previewCard {
+  width: 100%;
+  /* Cap at the capture's native width so we don't soft-upscale past 950px. */
+  max-width: 950px;
+  margin-inline: auto;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-raised);
+  padding: clamp(12px, 1.2vw, 18px);
+}
+.previewCard img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-md);
+}
+.previewNote {
+  margin-top: var(--s-4);
+  font-size: var(--step-small);
+  color: var(--color-text);
+  text-align: center;
+  background: color-mix(in srgb, var(--color-cream) 88%, transparent);
+  border-radius: var(--r-pill);
+  padding: 6px 14px;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 900px) {
+  .previewCard {
+    overflow-x: auto;
+  }
+  .previewCard img {
+    min-width: 560px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .preview {
+    width: 100%;
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+  .breakdown {
+    max-width: none;
+  }
+}

@@ -1,0 +1,244 @@
+/* Kids reference 05 — celebration, then the hand-off strip. V3.1: no
+   mountain photograph here — section 4 is now the page's one full-mountain
+   moment, so this closes the page on the shared cream-to-blue field instead. */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: var(--section-y);
+}
+.confetti {
+  /* Soft pastel stick confetti — quiet, celebratory.
+     Asset: /assets/kids/confetti-pastel-sticks.webp */
+  position: absolute;
+  z-index: -1;
+  inset: auto auto 0 0;
+  width: min(50%, 680px);
+  max-height: 42%;
+  object-fit: cover;
+  object-position: bottom left;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.celebration {
+  position: relative;
+  isolation: isolate;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
+  gap: clamp(24px, 3vw, 56px);
+  align-items: center;
+}
+.copy {
+  max-width: 28rem;
+}
+.did {
+  margin-top: var(--s-4);
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+  font-weight: 600;
+  color: var(--color-navy);
+}
+.rule {
+  display: block;
+  width: 64px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--color-orange);
+  margin: var(--s-6) 0;
+}
+.support {
+  max-width: 22rem;
+}
+
+.product {
+  display: flex;
+  justify-content: center;
+}
+.productFrame {
+  /* The level-up plate is a portrait modal capture — keep it from dominating
+     the row now that it is cropped to the content cluster. */
+  width: min(100%, 430px);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-2xl);
+  box-shadow: var(--shadow-raised);
+  padding: clamp(10px, 1vw, 16px);
+}
+.productFrame img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+}
+
+/* ----------------------------------------------------------- hand-off --- */
+.handoff {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 1.8vw, 26px);
+  margin-top: clamp(30px, 3.2vw, 48px);
+  padding: clamp(18px, 2vw, 28px);
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
+  transition: grid-template-columns var(--dur) var(--ease);
+}
+.handoffOpen {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+
+.kidSide {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.6vw, 24px);
+  flex-wrap: wrap;
+}
+.kidIcon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--color-orange-tint);
+  color: var(--color-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.kidCopy {
+  min-width: 0;
+  flex: 1 1 14rem;
+}
+.kidTitle {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  color: var(--color-navy);
+}
+.kidSub {
+  font-size: var(--step-small);
+  color: var(--color-text);
+  margin-top: 2px;
+}
+.kidActions {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+.showBtn,
+.againBtn {
+  white-space: nowrap;
+}
+
+/* Revealed parent-facing state. */
+.parentSide {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+  padding-left: clamp(16px, 1.8vw, 28px);
+  border-left: 1px solid var(--color-border-soft);
+  animation: slideIn 420ms var(--ease) both;
+}
+.parentSide[hidden] {
+  display: none;
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .parentSide {
+    animation: none;
+  }
+}
+.parentArrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  color: var(--color-orange-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.parentTitle {
+  font-weight: 700;
+  font-size: var(--step-small);
+  color: var(--color-navy);
+  line-height: 1.4;
+}
+.parentSub {
+  font-size: var(--step-small);
+  color: var(--color-text);
+  margin: 4px 0 var(--s-4);
+  line-height: 1.5;
+}
+/* Navy rather than orange: this is the parent's action, visually distinct
+   from the child's orange buttons. */
+.parentCta {
+  background: var(--color-navy);
+  color: #fff;
+  min-height: var(--btn-h-sm);
+  padding-inline: var(--s-5);
+  font-size: var(--step-small);
+}
+.parentCta:hover {
+  background: #16304e;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .copy {
+    max-width: 34rem;
+  }
+  .handoffOpen {
+    grid-template-columns: 1fr;
+  }
+  .parentSide {
+    padding-left: 0;
+    padding-top: var(--s-5);
+    border-left: 0;
+    border-top: 1px solid var(--color-border-soft);
+  }
+}
+
+@media (max-width: 560px) {
+  .kidActions {
+    width: 100%;
+  }
+  .showBtn,
+  .againBtn {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 980px) {
+  .celebration {
+    overflow: clip;
+  }
+  /* Mobile-only: stars, triangles, dots, diamonds — celebration area only. */
+  .celebration::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url("/assets/kids/confetti-mobile-shapes.svg") repeat top left / 320px auto;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .confetti {
+    display: none;
+  }
+}

@@ -1,0 +1,40 @@
+/* Full-bleed ecosystem slide between parent support and 24/7 AI support. */
+.section {
+  background: var(--color-cream);
+  padding-block: var(--section-y-sm);
+  overflow: clip;
+}
+
+.frame {
+  min-width: 0;
+}
+
+.media {
+  width: 100%;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-raised);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding-inline: 0;
+  }
+  .frame {
+    width: 100%;
+    max-width: none;
+    padding-inline: 0;
+  }
+  .media {
+    border-radius: 0;
+    border-inline: 0;
+  }
+}

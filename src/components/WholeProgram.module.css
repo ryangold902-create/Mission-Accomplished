@@ -1,0 +1,200 @@
+/* PDF p.13 */
+.section {
+  background: var(--color-cream);
+  padding-top: var(--section-y);
+  /* V3.1: Pricing sits on the same cream ground right after this section, so
+     the bottom gap is deliberately tight — paired with Pricing's own reduced
+     top padding (see Pricing.module.css .section) to keep their combined gap
+     under 100px instead of stacking two full --section-y values into a
+     "cream desert" between the CTA strip and "Start free...". */
+  padding-bottom: clamp(24px, 2.4vw, 36px);
+}
+
+/* Wide enough for "Support built around your family." to hold one line, as in
+   the static; the supporting copy keeps its own narrower measure below. */
+.head {
+  max-width: 57rem;
+  /* V3.1: shared headline→composition token, so headline and cards read as
+     one unit rather than two blocks. */
+  margin-bottom: var(--head-to-body);
+}
+.head h2 {
+  margin-bottom: var(--s-5);
+}
+.lede {
+  max-width: 34rem;
+  color: var(--color-text);
+}
+
+/* ----------------------------------------------------------------- cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 26px);
+  align-items: stretch;
+}
+.cards > li {
+  display: flex;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-lg);
+  padding: clamp(20px, 2vw, 28px);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-raised);
+}
+.cardFeatured {
+  border-color: color-mix(in srgb, var(--color-orange) 48%, transparent);
+}
+.iconWrap {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #f2eee7;
+  color: var(--color-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--s-6);
+}
+.cardEyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-orange-text);
+  margin-bottom: var(--s-2);
+}
+.cardRule {
+  border: 0;
+  border-top: 1px solid var(--color-border-soft);
+  margin: var(--s-4) 0 var(--s-4);
+}
+.cardBody {
+  font-size: var(--step-small);
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+/* ----------------------------------------------------- connected support */
+.connected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* V3.1: margin-top + padding-top together are the "after cards" gap —
+     tightened from a combined 66–92px to the requested ~48–64px. */
+  margin-top: clamp(28px, 2.4vw, 36px);
+  padding-top: clamp(20px, 2vw, 28px);
+  position: relative;
+}
+.connected::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border-soft);
+}
+.connectedIcon {
+  position: absolute;
+  top: -13px;
+  background: var(--color-cream);
+  color: var(--color-orange);
+  padding-inline: var(--s-4);
+}
+.connectedTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.1875rem, 1rem + 0.7vw, 1.5rem);
+  color: var(--color-navy);
+  margin-bottom: var(--s-3);
+  text-wrap: balance;
+}
+.roles {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--step-small);
+  color: var(--color-text);
+  margin-bottom: var(--s-2);
+}
+.dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  margin-right: var(--s-3);
+  vertical-align: middle;
+}
+.connectedSub {
+  font-size: var(--step-small);
+  color: var(--color-text-muted);
+}
+
+/* ------------------------------------------------------------ CTA strip */
+.strip {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(16px, 2.2vw, 32px);
+  /* V3.1: requested ~36–48px between the connected-support block and the strip */
+  margin-top: clamp(36px, 3.2vw, 48px);
+  padding: clamp(20px, 2.2vw, 30px) clamp(20px, 2.4vw, 34px);
+  background: var(--color-cream-warm);
+  border: 1px solid color-mix(in srgb, var(--color-orange) 16%, transparent);
+  border-radius: var(--r-lg);
+}
+.stripIcon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-orange);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.stripTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  color: var(--color-navy);
+}
+.stripSub {
+  font-size: var(--step-small);
+  color: var(--color-text);
+  margin-top: 2px;
+  max-width: 26rem;
+}
+.stripCta {
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .strip {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}

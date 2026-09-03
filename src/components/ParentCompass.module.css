@@ -1,0 +1,95 @@
+/* PDF p.7 — warm cream, generous whitespace, one clear idea. */
+.section {
+  background: linear-gradient(
+    112deg,
+    var(--color-cream) 0%,
+    var(--color-cream) 34%,
+    var(--color-blue-mist) 100%
+  );
+  /* V3.1: this is the calmest section on the page, not the most spacious —
+     the transition token (was --section-y) closes the dead air in and out. */
+  padding-block: var(--section-y-sm);
+  overflow: clip;
+}
+
+.grid {
+  display: grid;
+  /* V3.1: 35/65 nudges the desktop balance into the requested 34–36% text /
+     64–66% product range; the tighter gap pulls the product visually closer
+     to the copy it's illustrating. */
+  grid-template-columns: minmax(0, 35fr) minmax(0, 65fr);
+  align-items: center;
+  gap: clamp(20px, 2.4vw, 40px);
+}
+
+.copy {
+  max-width: 25rem;
+}
+.copy h2 {
+  margin-bottom: var(--s-7);
+}
+.secondary {
+  font-size: var(--step-lede);
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: var(--s-6);
+}
+.support {
+  font-size: var(--step-small);
+  line-height: 1.62;
+  color: var(--color-text-muted);
+  max-width: 22rem;
+}
+
+.product {
+  min-width: 0;
+  max-width: 100%;
+}
+.product img {
+  width: 100%;
+  max-width: 956px; /* V3.1: full native resolution — "make the tablet slightly larger" */
+  margin-inline: auto;
+}
+
+.closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-4);
+  text-align: center;
+  /* V3.1: was --section-y-sm (40–64px) — the line reads as a continuation of
+     the composition above it, not a new block, so it sits close beneath it. */
+  margin-top: clamp(20px, 2.2vw, 32px);
+  padding-inline: var(--page-gutter);
+}
+.closing p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1875rem, 1rem + 0.7vw, 1.5rem);
+  color: var(--color-navy);
+  text-wrap: balance;
+}
+.arrow {
+  color: var(--color-orange);
+}
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-9);
+  }
+  .copy {
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .product {
+    width: 100%;
+    margin-inline: 0;
+  }
+  .product img {
+    min-width: 0;
+    max-width: 100%;
+  }
+}

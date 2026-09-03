@@ -1,0 +1,45 @@
+.bare,
+.device {
+  position: relative;
+  width: 100%;
+}
+.media,
+.video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.raised {
+  filter: drop-shadow(0 24px 48px rgba(12, 32, 56, 0.14));
+}
+
+/* -- CSS tablet frame: keeps the device separate from the media asset --- */
+.bezel {
+  background: linear-gradient(150deg, #2b3038 0%, #14181e 42%, #2b3038 100%);
+  border-radius: clamp(16px, 2.2vw, 30px);
+  padding: clamp(7px, 1.05vw, 14px);
+  box-shadow:
+    0 2px 5px rgba(12, 32, 56, 0.16),
+    0 26px 56px rgba(12, 32, 56, 0.18);
+}
+.screen {
+  border-radius: clamp(10px, 1.5vw, 20px);
+  overflow: hidden;
+  background: var(--color-card);
+  line-height: 0;
+}
+
+/* -- reduced motion: swap the video for its poster --------------------- */
+.motionFallback {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .video {
+    display: none;
+  }
+  .motionFallback {
+    display: block;
+  }
+}

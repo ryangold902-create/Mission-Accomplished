@@ -1,0 +1,51 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+.group {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-pill);
+  padding: 4px;
+  box-shadow: 0 1px 2px rgba(12, 32, 56, 0.05);
+}
+.option {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  border-radius: var(--r-pill);
+  font-size: var(--step-small);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+/* Selection is carried by weight, fill and the underline as well as colour. */
+.active {
+  color: var(--color-navy);
+  background: var(--color-white);
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--color-orange);
+}
+.option:hover {
+  color: var(--color-navy);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-orange);
+  flex: none;
+}
+
+.compact .option {
+  min-height: 34px;
+  padding: 0 var(--s-3);
+  font-size: 0.8125rem;
+}

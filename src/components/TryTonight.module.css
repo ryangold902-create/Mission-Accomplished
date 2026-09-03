@@ -1,0 +1,380 @@
+/* PDF pp.8–12 — pale blue wash, cream cards. Assessment CTA sits above the
+   strategies; strategies stay blurred until the JotForm redirect unlocks them.
+   Background comes from the shared `.env-sky` utility class. */
+.section {
+  padding-top: var(--section-y-sm);
+}
+.inner {
+  padding-bottom: var(--section-y-sm);
+}
+
+.head {
+  max-width: 36rem;
+  margin-bottom: clamp(22px, 2.4vw, 32px);
+}
+.head h2 {
+  margin-bottom: var(--s-4);
+}
+.lede {
+  color: var(--color-text);
+}
+
+/* ----------------------------------------------------------- gate CTA --- */
+.gate {
+  margin-bottom: clamp(28px, 3vw, 40px);
+  max-width: 28rem;
+}
+.gateCta {
+  align-items: flex-start;
+}
+.gateNote {
+  margin-top: var(--s-4);
+  font-size: var(--step-small);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* -------------------------------------------------------- strategies --- */
+.strategies {
+  position: relative;
+}
+.strategiesPending {
+  opacity: 0;
+}
+.strategiesLocked {
+  user-select: none;
+}
+.strategiesLocked .tabs,
+.strategiesLocked .panel,
+.strategiesLocked .another {
+  filter: blur(5px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.lockOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.lockBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  background: var(--color-white);
+  color: var(--color-navy);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-pill);
+  padding: 12px 18px;
+  font-size: var(--step-small);
+  font-weight: 600;
+  box-shadow: var(--shadow-raised);
+  pointer-events: none;
+}
+.lockBadge svg {
+  flex: none;
+  color: var(--color-orange);
+}
+
+/* ------------------------------------------------------------------ tabs */
+.tabs {
+  display: flex;
+  gap: clamp(16px, 2.4vw, 40px);
+  border-bottom: 1px solid var(--color-border-blue);
+  margin-bottom: clamp(18px, 1.8vw, 26px);
+  padding-bottom: 3px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+.tab {
+  position: relative;
+  flex: none;
+  min-height: 46px;
+  padding: 0 2px var(--s-3);
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease);
+}
+.tab:disabled {
+  cursor: default;
+}
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  height: 2px;
+  background: var(--color-orange);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dur) var(--ease);
+}
+.tab:hover:not(:disabled) {
+  color: var(--color-navy);
+}
+.tabActive {
+  color: var(--color-orange-text);
+  font-weight: 600;
+}
+.tabActive::after {
+  transform: scaleX(1);
+}
+
+/* ----------------------------------------------------------------- cards */
+.panel {
+  animation: fade 420ms var(--ease) both;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.14fr);
+  align-items: stretch;
+  gap: clamp(12px, 1.6vw, 24px);
+}
+.card {
+  background: var(--color-card);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  padding: clamp(20px, 2vw, 30px);
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(228px, 20vw, 272px);
+}
+.cardLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--s-4);
+}
+.cardLabelOrange {
+  color: var(--color-orange-text);
+}
+.instead,
+.tryThis {
+  font-family: var(--font-serif);
+  color: var(--color-navy);
+  line-height: 1.28;
+}
+.instead {
+  font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.625rem);
+}
+.tryThis {
+  font-size: clamp(1.1875rem, 1rem + 0.75vw, 1.625rem);
+}
+.cardRule {
+  border: 0;
+  border-top: 1px solid var(--color-border-soft);
+  margin: var(--s-6) 0 var(--s-4);
+}
+.cardFoot {
+  font-size: var(--step-small);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin-top: auto;
+}
+
+/* -------------------------------------------------------- turn-it column */
+.turn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-4);
+  padding-inline: var(--s-2);
+}
+.turnArrow {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  color: var(--color-orange);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+}
+.turnText {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* ------------------------------------------------------------ try card   */
+.tryBody {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s-4);
+  height: 100%;
+}
+.tryCopy {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.illus {
+  width: clamp(104px, 12vw, 152px);
+  height: clamp(104px, 12vw, 152px);
+  object-fit: contain;
+  flex: none;
+  align-self: flex-end;
+}
+
+/* ---------------------------------------------------------- why it helps */
+.why {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  background: var(--color-blue-mist);
+  border-radius: var(--r-md);
+  padding: var(--s-4) var(--s-6);
+  margin: clamp(18px, 2vw, 26px) auto 0;
+  width: fit-content;
+  max-width: 100%;
+}
+.whyIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.why p {
+  font-size: var(--step-small);
+  line-height: 1.5;
+}
+.why strong {
+  display: block;
+  color: var(--color-navy);
+  font-weight: 600;
+}
+.why span {
+  color: var(--color-text);
+}
+
+/* -------------------------------------------------------- show me another */
+.another {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: clamp(14px, 1.6vw, 20px);
+}
+.anotherRule {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-blue);
+}
+.another p {
+  font-size: var(--step-small);
+  color: var(--color-text);
+  white-space: nowrap;
+}
+.anotherBtn {
+  white-space: nowrap;
+}
+.anotherBtn:disabled {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.1fr);
+  }
+  .illus {
+    width: clamp(88px, 11vw, 120px);
+  }
+}
+
+@media (max-width: 860px) {
+  .cards {
+    grid-template-columns: 1fr;
+    gap: var(--s-4);
+  }
+  .turn {
+    flex-direction: row;
+    gap: var(--s-4);
+    padding-block: var(--s-2);
+  }
+  .turnArrow {
+    transform: rotate(90deg);
+  }
+  .turnText {
+    line-height: 1.35;
+  }
+  .why {
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  .tabs {
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-6);
+    overflow-x: visible;
+  }
+  .tab {
+    min-height: 40px;
+  }
+  .lockBadge {
+    margin-inline: var(--s-4);
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .another {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .anotherRule {
+    display: none;
+  }
+  .tryBody {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .illus {
+    align-self: center;
+    width: 132px;
+    height: 132px;
+    margin-top: var(--s-4);
+  }
+}

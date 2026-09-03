@@ -1,0 +1,78 @@
+/* Kids reference 03. V3.1: flat pale sky blue, no mountain photograph — the
+   demo video is this section's visual anchor instead. */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: var(--section-y);
+}
+
+.head {
+  max-width: 44rem;
+  margin-bottom: clamp(24px, 2.6vw, 38px);
+}
+.head h2 {
+  margin-bottom: var(--s-5);
+}
+.support {
+  max-width: 34rem;
+}
+
+.demo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(20px, 2.6vw, 44px);
+  align-items: center;
+}
+.videoWrap {
+  min-width: 0;
+}
+
+/* A translucent cream card rather than plain text, so it reads as its own
+   callout against the flat sky-blue ground instead of floating in it. */
+.aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-3);
+  width: clamp(170px, 15vw, 215px);
+  padding: var(--s-5);
+  background: color-mix(in srgb, var(--color-cream) 92%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+}
+.asideIcon {
+  color: var(--color-orange);
+}
+.aside p {
+  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.3125rem);
+  line-height: 1.35;
+  color: var(--color-navy);
+}
+.aside strong {
+  display: block;
+  font-weight: 700;
+}
+.aside span {
+  display: block;
+  color: var(--color-text);
+}
+
+/* -------------------------------------------------------------- chips --- */
+/* The strip itself is <KidsChips>; this is only its offset in this section. */
+.chips {
+  margin-top: clamp(24px, 2.6vw, 38px);
+}
+
+@media (max-width: 1000px) {
+  .demo {
+    grid-template-columns: 1fr;
+  }
+  .aside {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+}

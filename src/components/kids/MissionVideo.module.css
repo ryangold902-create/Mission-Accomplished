@@ -1,0 +1,100 @@
+/* Kids reference 03 — the large replaceable demo container. */
+.frame {
+  position: relative;
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-2xl);
+  box-shadow: var(--shadow-raised);
+  padding: clamp(16px, 1.6vw, 26px);
+}
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--step-small);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--s-4);
+}
+.play {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-navy);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.stage {
+  position: relative;
+}
+.shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Never render the still larger than it actually is. The stage is
+     full-width, but this poster is a fixed-resolution capture — letting it
+     stretch past its own pixels ships a visibly soft image. The cap comes
+     from the poster's declared width, so a higher-resolution recording's
+     poster will simply fill more of the stage without a CSS change. */
+  max-width: var(--shot-max, none);
+  margin-inline: auto;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-white);
+}
+
+/* Decorative "this plays" affordance, centred on the still poster — see the
+   component doc for why it is hidden from assistive tech. Sized as a clamp
+   rather than a fixed px so it stays proportional on the very large stage a
+   full-width video container renders at on desktop. */
+.playOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(44px, 5vw, 60px);
+  height: clamp(44px, 5vw, 60px);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-navy) 82%, transparent);
+  color: #fff;
+  box-shadow: var(--shadow-raised);
+  pointer-events: none;
+}
+.playOverlay svg {
+  /* Optically centre the play glyph inside the circle — it isn't symmetric. */
+  margin-left: 3px;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+  background: var(--color-navy);
+  /* Matches the supplied poster's own proportions (950x280) so the stage is
+     already the right shape before a real recording replaces the still —
+     no layout jump when `sources` is supplied later. */
+  aspect-ratio: 950 / 280;
+}
+
+/* Below this width the wide challenge sheet would compress its step rows to
+   hairlines, so it scrolls sideways at a readable size instead. */
+@media (max-width: 900px) {
+  .stage {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: var(--s-2);
+  }
+  .shot {
+    min-width: 620px;
+    scroll-snap-align: start;
+  }
+}

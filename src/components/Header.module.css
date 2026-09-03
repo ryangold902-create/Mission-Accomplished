@@ -1,0 +1,229 @@
+.header {
+  position: sticky;
+  top: 0;
+  /* Above the portaled scrim/panel (150/160) so the logo + close control stay usable. */
+  z-index: 170;
+  /* Frosted glass lives on ::before — putting backdrop-filter on .header itself
+     makes it the containing block for position:fixed descendants. The menu is
+     portaled to document.body to escape that trap entirely. */
+  background: transparent;
+  transition: box-shadow var(--dur) var(--ease);
+}
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--color-cream) 88%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  transition: background-color var(--dur) var(--ease);
+}
+.compact {
+  box-shadow: 0 1px 0 var(--color-border-soft), 0 8px 24px rgba(12, 32, 56, 0.06);
+}
+.compact::before {
+  background: color-mix(in srgb, var(--color-cream) 96%, transparent);
+}
+.menuOpen::before {
+  background: var(--color-cream);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Same column as .container so the header aligns with every section. */
+.inner {
+  width: min(var(--page-max), calc(100% - var(--page-gutter) * 2));
+  margin-inline: auto;
+  padding-block: 11px;
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+  min-height: var(--header-h);
+  transition: padding var(--dur) var(--ease);
+}
+.compact .inner {
+  padding-block: 8px;
+}
+
+.logo {
+  flex: none;
+  display: block;
+  border-radius: var(--r-sm);
+}
+.logo img {
+  width: clamp(84px, 6.2vw, 94px);
+  height: auto;
+  transition: width var(--dur) var(--ease);
+}
+.compact .logo img {
+  width: clamp(78px, 5.6vw, 86px);
+}
+
+.nav {
+  margin-inline: auto;
+}
+.navList {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--s-5), 2.4vw, var(--s-9));
+}
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease);
+}
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 1.5px;
+  background: var(--color-orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+.navLink:hover {
+  color: var(--color-navy);
+}
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+/* Kids mode keeps the adult destinations — a parent browsing the Kids page
+   still needs a route to Pricing and Our Story, and forking the header would
+   split one architecture into two. They are de-emphasised instead, so the
+   audience toggle and "Try a Mission" are clearly the dominant choices.
+   Muted-on-cream is still AA; hover returns full contrast. */
+.navKids .navLink {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+.navKids .navLink:hover {
+  color: var(--color-navy);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  flex: none;
+}
+.cta > a,
+.ctaLink {
+  white-space: nowrap;
+}
+
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-sm);
+  color: var(--color-navy);
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-white);
+}
+
+/* ---------------------------------------------------------- mobile panel
+   Rendered via createPortal(document.body) so sticky/backdrop-filter on
+   <header> cannot become the containing block for these fixed layers. */
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 32, 56, 0.32);
+  z-index: 150;
+}
+.panel {
+  position: fixed;
+  top: var(--header-h, 72px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 160;
+  width: 100%;
+  min-height: calc(100dvh - var(--header-h, 72px));
+  background: var(--color-cream);
+  border-top: 1px solid var(--color-border-soft);
+  padding: var(--s-6) var(--page-gutter) var(--s-10);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-7);
+  -webkit-overflow-scrolling: touch;
+}
+/* The class sets display:flex, which would otherwise beat the UA [hidden] rule. */
+.panel[hidden] {
+  display: none !important;
+}
+.panelList {
+  display: flex;
+  flex-direction: column;
+}
+.panelLink {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  color: var(--color-navy);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+.panelFoot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-6);
+}
+.panelDownload {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--color-border-soft);
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 1180px) {
+  .navList {
+    gap: var(--s-5);
+  }
+}
+@media (max-width: 1040px) {
+  .toggle {
+    display: none;
+  }
+}
+@media (max-width: 980px) {
+  .nav {
+    display: none;
+  }
+  .burger {
+    display: inline-flex;
+  }
+  .cta {
+    display: none;
+  }
+  .toggle {
+    display: block;
+    margin-inline: auto;
+  }
+}
+@media (max-width: 560px) {
+  .toggle {
+    display: none;
+  }
+  .inner {
+    justify-content: space-between;
+  }
+}

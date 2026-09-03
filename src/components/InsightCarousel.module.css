@@ -1,0 +1,365 @@
+/* PDF pp.3–5 — pale blue panel + photographic stage with an insight card. */
+.section {
+  background: var(--color-cream);
+}
+
+/* Page grid: inset track, then a 39/61 split. The pale panel bleeds to the
+   true left edge via .panelBg; the copy still starts on the page column, so
+   there is no second centred container inside the panel. */
+.grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] var(--page-inset)
+    [content-start] minmax(0, 39fr)
+    [split] minmax(0, 61fr)
+    [full-end];
+  align-items: stretch;
+}
+.panelBg {
+  grid-column: full-start / split;
+  grid-row: 1;
+  background: var(--color-blue-soft);
+}
+
+/* ------------------------------------------------------------ left panel */
+.panel {
+  grid-column: content-start / split;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  padding: var(--section-y-lg) clamp(32px, 3.2vw, 56px) var(--section-y-lg) 0;
+}
+.panelInner {
+  width: 100%;
+  max-width: 27rem; /* ~432px — the headline wraps as it does in the static */
+}
+.rule {
+  display: block;
+  width: 56px;
+  height: 2px;
+  background: var(--color-orange);
+  margin: var(--s-7) 0 var(--s-6);
+}
+.support {
+  max-width: 20rem;
+  color: var(--color-text);
+}
+.quote {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: var(--s-9);
+}
+.quote img {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* Matches the hero portrait's crop — see Hero.module.css .portrait. */
+  object-position: 50% 8%;
+  flex: none;
+}
+.quote figcaption {
+  font-size: var(--step-body);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+.quote em {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  color: var(--color-navy);
+  margin-top: 2px;
+}
+
+/* ----------------------------------------------------------------- stage */
+.stage {
+  grid-column: split / full-end;
+  grid-row: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.stack {
+  position: relative;
+  flex: 1;
+  min-height: clamp(420px, 40vw, 660px);
+}
+/* Every pane is `inset: 0` on the same .stack box, so .card and .tabs below
+   land at identical coordinates across all three tab states by construction
+   — the invariant is geometric, not content-matched, so it holds even though
+   the three panels' text lengths differ slightly. Don't give an individual
+   .pane its own height/position rule, or that guarantee breaks. */
+.pane {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 520ms var(--ease);
+  pointer-events: none;
+}
+.paneActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+/* ------------------------------------------------------------ insight card */
+.card {
+  position: absolute;
+  right: clamp(16px, 2.4vw, 44px);
+  top: clamp(var(--s-5), 3vw, 52px);
+  width: min(300px, 46%);
+  background: var(--color-card);
+  border-radius: var(--r-xl);
+  padding: clamp(18px, 1.7vw, 26px);
+  box-shadow: var(--shadow-raised);
+}
+.cardNum {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-orange-text);
+  line-height: 1;
+  margin-bottom: var(--s-4);
+}
+.cardLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--s-3);
+}
+.cardQuote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.0625rem, 0.9rem + 0.55vw, 1.3125rem);
+  line-height: 1.34;
+  color: var(--color-navy);
+  margin-bottom: var(--s-5);
+}
+.cardRule {
+  border: 0;
+  border-top: 1px solid var(--color-border-soft);
+  margin: 0 0 var(--s-5);
+}
+.cardList {
+  display: grid;
+  gap: var(--s-3);
+}
+.cardList li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--color-navy);
+}
+.bullet {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--color-orange) 42%, transparent);
+  display: inline-flex;
+  flex: none;
+  position: relative;
+}
+.bullet::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--color-orange);
+}
+
+/* ------------------------------------------------------------------ tabs */
+.tabs {
+  position: absolute;
+  right: clamp(16px, 2.4vw, 44px);
+  /* Raised floor (was clamp(16px,2vw,28px)) so the tab row keeps clear air
+     under it at every width instead of sitting right on the stage edge. */
+  bottom: clamp(var(--s-5), 2.2vw, var(--s-7));
+  left: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--color-card);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-raised);
+  overflow: hidden;
+  width: min(420px, 64%);
+}
+.tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--s-4) var(--s-2) calc(var(--s-4) + 3px);
+  min-height: 64px;
+  text-align: center;
+  transition: background-color var(--dur) var(--ease);
+}
+.tab + .tab {
+  border-left: 1px solid var(--color-border-soft);
+}
+.tab:hover {
+  background: color-mix(in srgb, var(--color-orange) 5%, transparent);
+}
+.tabNum {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  line-height: 1.1;
+  transition: color var(--dur) var(--ease);
+}
+.tabLabel {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+  transition: color var(--dur) var(--ease);
+}
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  /* Held off the card's own bottom edge: .tabs clips to a 16px radius, so an
+     indicator sitting flush at 0 gets shaved by the rounding. */
+  bottom: 4px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--color-orange);
+  transform: scaleX(0);
+  transition: transform var(--dur) var(--ease);
+}
+.tabActive .tabNum {
+  color: var(--color-orange-text);
+}
+.tabActive .tabLabel {
+  color: var(--color-navy);
+}
+.tabActive::after {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------- closing */
+.closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-4);
+  text-align: center;
+  /* One of the three shared rhythm steps, not an invented clamp — this beat
+     between two sections is the "transition" case --section-y-sm exists for. */
+  padding: var(--section-y-sm) var(--page-gutter);
+  background: var(--color-cream);
+}
+.closing p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.625rem);
+  line-height: 1.34;
+  color: var(--color-navy);
+  text-wrap: balance;
+}
+.arrow {
+  color: var(--color-orange);
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 1180px) {
+  .card {
+    width: min(276px, 50%);
+  }
+  .tabs {
+    width: min(380px, 74%);
+  }
+}
+
+@media (max-width: 960px) {
+  /* Headline -> image/card -> tabs (brief §Responsive). */
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .panelBg {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .panel {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding: var(--section-y) var(--page-gutter);
+  }
+  .stage {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .panelInner {
+    margin-inline: auto;
+    max-width: 34rem;
+  }
+  .stack {
+    min-height: 0;
+  }
+  .pane {
+    position: relative;
+    display: none;
+  }
+  .paneActive {
+    display: block;
+  }
+  .photo {
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+  .card {
+    position: static;
+    width: min(34rem, 100%);
+    /* Less overlap on mobile so the step number stays in the card, not on the photo. */
+    margin: calc(-1 * clamp(12px, 3vw, 24px)) auto 0;
+    padding-top: clamp(28px, 6vw, 40px);
+    border-radius: var(--r-lg);
+  }
+  .tabs {
+    position: static;
+    width: min(34rem, 100%);
+    margin: var(--s-6) auto 0;
+    border: 1px solid var(--color-border-soft);
+  }
+  .stage {
+    padding: 0 var(--page-gutter) var(--s-9);
+  }
+}
+
+@media (max-width: 520px) {
+  .tabs {
+    grid-template-columns: 1fr;
+  }
+  .tab {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--s-3);
+    min-height: 56px;
+    text-align: left;
+  }
+  .tab + .tab {
+    border-left: 0;
+    border-top: 1px solid var(--color-border-soft);
+  }
+  .tab::after {
+    left: 0;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    height: auto;
+    border-radius: 0 3px 3px 0;
+    transform: scaleY(0);
+  }
+  .tabActive::after {
+    transform: scaleY(1);
+  }
+}

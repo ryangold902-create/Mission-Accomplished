@@ -1,0 +1,109 @@
+/* Kids reference 01 — warm cream-to-blue field, product right. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: clamp(28px, 3.4vw, 52px) clamp(40px, 4.4vw, 72px);
+}
+/* Layout, crop and mask come from .kids-mountain in globals.css. V3.1: the
+   product screenshot is the hero's subject now, not this photograph, so it
+   is held far below the shared 0.85 default opacity — just enough of a
+   silhouette to keep the summit language alive — and the fade stop is
+   pushed right so it stays clear of the product card. */
+.mountain {
+  --mountain-opacity: 0.14;
+  --mountain-fade: 62%;
+}
+/* Confetti is background texture here, not a focal element, so it is kept
+   far below the reference art's full-strength opacity. */
+.confetti {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+  width: min(34%, 400px);
+  max-height: 32%;
+  object-fit: cover;
+  object-position: bottom left;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+  align-items: center;
+  gap: clamp(24px, 3vw, 56px);
+}
+
+.copy {
+  max-width: 30rem;
+}
+.copy h1 {
+  margin-bottom: var(--s-6);
+}
+.support {
+  max-width: 24rem;
+  margin-bottom: var(--s-8);
+}
+.cta {
+  min-height: 62px;
+  padding-inline: var(--s-8);
+  font-size: 1.1875rem;
+  font-weight: 700;
+  border-radius: var(--r-md);
+}
+.trust {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-6);
+  font-size: var(--step-small);
+  color: var(--color-text-muted);
+}
+.trust svg {
+  flex: none;
+  color: var(--color-navy);
+}
+
+/* The real "before challenge" dashboard is a landscape capture; it is sized
+   so the hero stays about one screen rather than being stretched to fill. */
+.product {
+  min-width: 0;
+  width: 100%;
+  /* The capture is cropped to the mountain route, milestones and the Clean
+     Room card, so it can render large enough to actually read. */
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-9);
+  }
+  .copy {
+    max-width: 34rem;
+  }
+  .product {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cta {
+    width: 100%;
+    min-height: 58px;
+  }
+  .product {
+    max-width: 100%;
+  }
+}
+
+/* The mountain is dropped at this width by .kids-mountain in globals.css; the
+   confetti goes with it for the same reason. */
+@media (max-width: 980px) {
+  .confetti {
+    display: none;
+  }
+}

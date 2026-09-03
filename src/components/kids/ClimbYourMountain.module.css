@@ -1,0 +1,140 @@
+/* Kids reference 04. V3.1: this is the one Kids section that keeps the full
+   mountain photograph. The other four now run flat colour grounds, so the
+   crop/filter/mask from .kids-mountain in globals.css get pushed toward
+   full strength here rather than the shared defaults — bigger, more opaque,
+   fading in earlier — to make this deliberately the strongest mountain
+   moment on the page. */
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: var(--section-y);
+}
+.mountain {
+  --mountain-w: clamp(380px, 38vw, 620px);
+  --mountain-opacity: 1;
+  --mountain-fade: 30%;
+}
+
+.grid {
+  display: grid;
+  /* Wider than the other Kids sections' 38/62 split — the real dashboard
+     capture is the section's headline visual now, so it gets more room. */
+  grid-template-columns: minmax(0, 34fr) minmax(0, 66fr);
+  gap: clamp(28px, 3.2vw, 60px);
+  align-items: center;
+}
+
+.copy {
+  position: relative;
+  max-width: 30rem;
+}
+.copy h2 {
+  margin-bottom: var(--s-6);
+}
+.copy .eyebrow {
+  margin-bottom: var(--s-4);
+}
+.support {
+  max-width: 22rem;
+}
+/* Reference 04 runs this dashed trail up out of the copy and lands its head on
+   the dashboard's left edge. Right-aligning it against the column (and letting
+   it reach a little into the gutter) is what makes it point at the card rather
+   than into empty space — it is hidden once the grid stacks and there is
+   nothing to its right to point at. */
+.trail {
+  display: block;
+  width: fit-content;
+  margin-top: var(--s-8);
+  margin-left: auto;
+  margin-right: calc(-1 * clamp(8px, 1.4vw, 26px));
+  opacity: 0.9;
+}
+
+/* The real dashboard capture, framed rather than redrawn. */
+.boardFrame {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-2xl);
+  box-shadow: var(--shadow-raised);
+  padding: clamp(10px, 1vw, 16px);
+}
+.boardFrame img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+}
+
+/* ------------------------------------------------------------- stats ---- */
+.stats {
+  margin-top: clamp(28px, 3vw, 44px);
+}
+.stats ul {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 18px);
+}
+.stats li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4) clamp(12px, 1.2vw, 18px);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+}
+.stats img {
+  width: 28px;
+  height: 28px;
+  flex: none;
+}
+.statLabel {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+}
+.statValue {
+  display: block;
+  font-size: var(--step-small);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.green {
+  color: #1c6b45;
+}
+.orange {
+  color: var(--color-orange-text);
+}
+.purple {
+  color: #6b4bab;
+}
+.flame {
+  color: #b1400f;
+}
+.blue {
+  color: #1c4a75;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .copy {
+    max-width: 34rem;
+  }
+  .trail {
+    display: none;
+  }
+  .stats ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .stats ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

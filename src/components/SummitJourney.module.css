@@ -1,0 +1,278 @@
+/* PDF p.2 — split editorial composition: cream copy left, mountain right. */
+.section {
+  position: relative;
+  background: var(--color-cream);
+  overflow: clip;
+  /* The mountain composition is sized to its own aspect ratio below (see
+     .scene), so it can run taller than the copy column. This bottom padding
+     is what guarantees the next (pale-blue) section only starts once the
+     whole route — including the lowest "More support" waypoint — has
+     finished, instead of the two sections' edges colliding. */
+  padding-bottom: var(--section-y-lg);
+}
+
+/* One page grid: an inset track that matches .container, then a 38/62 split.
+   The photograph runs from the split to the true right edge. */
+.grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] var(--page-inset)
+    [content-start] minmax(0, 38fr)
+    [split] minmax(0, 62fr)
+    [full-end];
+  align-items: center;
+}
+
+/* ------------------------------------------------------------------ copy */
+.copy {
+  grid-column: content-start / split;
+  padding: var(--section-y-lg) clamp(24px, 2.6vw, 48px) var(--section-y-lg) 0;
+  position: relative;
+  z-index: 2;
+}
+.rule {
+  display: block;
+  width: 56px;
+  height: 2px;
+  background: var(--color-orange);
+  margin: var(--s-7) 0 var(--s-6);
+}
+.support {
+  font-size: var(--step-lede);
+  line-height: 1.6;
+  max-width: 22rem;
+}
+
+/* ----------------------------------------------------------------- scene */
+/* Locked to the photograph's true proportions (869x995) rather than an
+   independent height guess: the old clamp(520px,56vw,940px) fell out of sync
+   with the rendered column width at wide viewports (it topped out at 940px
+   while the aspect-correct height reached ~1125px there), so the image got
+   silently bottom-cropped while the unclipped waypoint labels below it did
+   not — that mismatch is what let "More support" bleed past the section and
+   made the route look like it exited the frame. Deriving the height from
+   aspect-ratio keeps the box, the photo and the waypoint overlay in lockstep
+   at every width. */
+.scene {
+  grid-column: split / full-end;
+  position: relative;
+  align-self: stretch;
+  aspect-ratio: 869 / 995;
+  /* Milestone labels are sized in cqw so they keep the same proportion to the
+     photograph at every width — matching the static, and guaranteeing they
+     cover the area where the baked-in labels were removed. */
+  container-type: inline-size;
+}
+/* Only the photograph is clipped, so the left-hand milestone label can still
+   reach out into the cream column. Feathers the photo's bottom edge into the
+   section's cream ground instead of ending on a hard horizontal line. */
+.clip {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+}
+.photo {
+  width: 100%;
+  height: auto;
+}
+/* Blend the photograph back into the cream column, as in the static. */
+.fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--color-cream) 0%,
+    color-mix(in srgb, var(--color-cream) 72%, transparent) 7%,
+    color-mix(in srgb, var(--color-cream) 28%, transparent) 16%,
+    transparent 30%
+  );
+}
+
+/* -------------------------------------------------------- route milestones */
+/* Same geometry as the un-cropped photograph, so waypoint percentages line up. */
+.points {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 869 / 995;
+  /* Above .fade. The cream blend is z-index 1 and covers this same box, so
+     without this it paints straight over the waypoint labels — at the left
+     edge the gradient is fully opaque cream, which is what was cutting
+     "More support" off mid-word. */
+  z-index: 2;
+}
+.fade {
+  z-index: 1;
+}
+.point {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.anchor {
+  position: absolute;
+  top: 0;
+  display: block;
+  transform: translateY(-50%);
+}
+.right .anchor {
+  left: 0;
+}
+/* "More support" is the lowest waypoint AND sits at x:6.2% — hard against the
+   photograph's left edge. Hanging its label outboard put it in the cream
+   column under the fade, where it was clipped; it reads inboard at every
+   width instead, so the whole label stays inside the mountain visual. */
+.left .anchor {
+  left: 0;
+  right: auto;
+  transform: translateY(calc(-50% - 2.4cqw));
+}
+.pointInner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  /* Labels wrap rather than forcing a single line — a nowrap label cannot
+     shrink, so at narrow widths it could only ever overflow the frame. */
+  white-space: normal;
+}
+.right .pointInner,
+.left .pointInner {
+  flex-direction: row;
+}
+.connector {
+  display: block;
+  width: 5.5cqw;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.85);
+  flex: none;
+}
+/* A restrained translucent backing sized to the text itself, not a card and
+   not the wide blurred plate this used to be (that plate's bleed was heavy
+   enough to read as an opaque box behind "Building routine" in particular,
+   the waypoint sitting over the busiest part of the trail). Legibility now
+   comes from the tight backing plus a minimal text-shadow, not a halo. */
+.label {
+  display: block;
+  transform: translateY(var(--label-shift, 0));
+  /* Sized to its own text, capped so it can never reach the frame edge. The
+     old `min-width: 30cqw` forced every label to ~30% of the photo's width
+     regardless of content, which is what made them read as floating cards
+     and what pushed the longest one out of the composition.
+     `max-content` is load-bearing: the anchor these sit in is a zero-width
+     box, so without it the label collapses to min-content and wraps after
+     every word. The cap still lets genuinely long text wrap rather than
+     overflow the frame. */
+  width: max-content;
+  max-width: 30cqw;
+  padding: 0.6cqw 0.9cqw;
+  border-radius: 5px;
+  background: rgba(252, 249, 245, 0.74);
+  box-shadow: 0 1px 6px rgba(20, 34, 52, 0.07);
+}
+.left .label,
+.right .label {
+  text-align: left;
+}
+.labelTitle {
+  display: block;
+  font-size: max(11px, 1.9cqw);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  line-height: 1.3;
+}
+.labelLine {
+  display: block;
+  margin-top: 2px;
+  font-size: max(12px, 2cqw);
+  color: var(--color-navy);
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------- mobile stack  */
+.stackedList {
+  display: none;
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 1160px) {
+  /* Slightly narrower crop of the photo keeps the route the hero of the frame. */
+  .photo {
+    object-position: 58% center;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Headline first, then the mountain with a simplified waypoint list. */
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  /* Below this width .stackedList supplies its own bottom padding (see
+     below), so the desktop containment fix on .section would double up. */
+  .section {
+    padding-bottom: 0;
+  }
+  .scene {
+    grid-column: 1 / -1;
+  }
+  .copy {
+    grid-column: 1 / -1;
+    max-width: 34rem;
+    margin-inline: auto;
+    padding: var(--section-y) var(--page-gutter) var(--s-8);
+  }
+  .scene {
+    flex-direction: column;
+  }
+  .scene {
+    /* Cancels the desktop aspect-ratio (869/995) so the portrait mobile
+       photo below — a different crop, 657/1224 — controls the height
+       instead of being forced into the landscape photo's proportions. */
+    aspect-ratio: auto;
+    height: auto;
+    overflow: visible;
+  }
+  .clip {
+    position: static;
+    overflow: visible;
+  }
+  .photo {
+    aspect-ratio: 657 / 1224;
+    max-height: 62vh;
+    object-fit: cover;
+    object-position: center;
+    content: url("/assets/summit-mountain-portrait.jpg");
+  }
+  .fade {
+    background: linear-gradient(to bottom, var(--color-cream) 0%, transparent 14%);
+  }
+  .points {
+    display: none;
+  }
+  .stackedList {
+    display: grid;
+    gap: var(--s-4);
+    padding: var(--s-8) var(--page-gutter) var(--section-y);
+    max-width: 34rem;
+    margin-inline: auto;
+    width: 100%;
+  }
+  .stackedItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-4);
+  }
+  .stackedDot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    border: 3px solid var(--color-white);
+    box-shadow: 0 0 0 1px var(--color-border-soft);
+    flex: none;
+    margin-top: 5px;
+  }
+}

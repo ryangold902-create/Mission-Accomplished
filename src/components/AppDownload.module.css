@@ -1,0 +1,86 @@
+/* The secondary app path. Everything here is deliberately quieter than
+   .btn--primary — the assessment stays the only filled CTA on the page. */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  align-items: flex-start;
+}
+.center {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.linkRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-size: var(--step-small);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+.prefix {
+  color: var(--color-text-muted);
+}
+/* Underlined rather than buttoned, so it reads as a link and never competes
+   with the orange CTA it sits beneath. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-orange-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--color-orange-text) 40%, transparent);
+  transition: text-decoration-color var(--dur) var(--ease);
+  /* keeps the 24px target minimum without changing the visual line height */
+  padding-block: 3px;
+}
+.link svg {
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+.link:hover {
+  text-decoration-color: currentColor;
+}
+.link:hover svg {
+  transform: translateX(3px);
+}
+
+.intro,
+.prompt {
+  font-size: var(--step-small);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+.prompt {
+  font-weight: 600;
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+.badges a {
+  display: block;
+  border-radius: var(--r-sm);
+}
+.badges img {
+  height: 44px;
+  width: auto;
+}
+
+/* On navy the orange text token would fail contrast, so the footer link uses
+   the on-navy variant. */
+:global(.on-navy) .link {
+  color: var(--color-orange-on-navy);
+}
+:global(.on-navy) .linkRow {
+  color: var(--color-on-navy-muted);
+}

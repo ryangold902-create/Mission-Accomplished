@@ -1,0 +1,336 @@
+/* PDF p.6 — warm cream at the top easing into pale blue, with the mountain
+   sitting behind the three product beats. */
+.section {
+  --caption-icon: 44px;
+  position: relative;
+  isolation: isolate;
+  /* Standard rhythm, not the cinematic step: this section already carries the
+     tallest content block on the page, so the larger padding on top of that
+     was what made it feel stretched vertically. */
+  padding-block: var(--section-y);
+  background: linear-gradient(
+    180deg,
+    var(--color-cream) 0%,
+    #f6f4f0 38%,
+    var(--color-blue-mist) 100%
+  );
+  overflow: clip;
+}
+.mountain {
+  position: absolute;
+  z-index: -1;
+  /* Full-width atmospheric layer, held below the headline and faded out on the
+     left so the copy always sits on clean cream. Sits closer behind the beats
+     than before (was clamp(96px,11.5vw,210px)) and at a lower opacity (was
+     0.9) — at full strength and floated that high it read as a giant empty
+     mountain plate above the devices rather than atmosphere behind them. */
+  top: clamp(64px, 8vw, 160px);
+  left: 50%;
+  transform: translateX(-50%);
+  /* The plate is only 818px wide natively. At the old min(1680px,116vw) it
+     rendered 2.04x its own pixels — a soft, over-stretched band across the
+     whole viewport. Held near its real resolution it reads as atmosphere
+     behind the beats instead of a backdrop competing with them. */
+  width: min(1180px, 94vw);
+  max-width: none;
+  opacity: 0.5;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%),
+    linear-gradient(90deg, transparent 2%, rgba(0, 0, 0, 0.4) 15%, #000 32%);
+  mask-image: linear-gradient(180deg, #000 60%, transparent 100%),
+    linear-gradient(90deg, transparent 2%, rgba(0, 0, 0, 0.4) 15%, #000 32%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+.inner {
+  position: relative;
+}
+
+/* ------------------------------------------------------------------ head */
+.head {
+  max-width: 38.5rem;
+  /* The shared head-to-body token, not a one-off clamp — this gap is the one
+     that drifted to 120-180px before it was pinned to a token everyone reads
+     the same way. */
+  margin-bottom: var(--head-to-body);
+}
+.head h2 {
+  margin-bottom: var(--s-5);
+}
+.lede {
+  font-size: var(--step-body);
+  color: var(--color-text);
+  max-width: 30rem;
+}
+
+/* ----------------------------------------------------------------- beats */
+.beats {
+  --beat-gap: clamp(20px, 2.4vw, 40px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--beat-gap);
+  align-items: stretch;
+  position: relative;
+}
+/* The dashed connector between the three states.
+   Anchored to each media element's own centre line rather than to a
+   percentage of the whole column: the three captions wrap to different
+   heights at different widths, so any fixed percentage of .beats drifts off
+   the iPads (it measured 46% against a true 48–50.5% across 1280–1440).
+   Hanging it off the media box makes it correct by construction. */
+.figure,
+.reframe {
+  position: relative;
+}
+.beat:nth-child(1) .figure::after,
+.beat:nth-child(2) .reframe::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: var(--beat-gap);
+  height: 2px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(
+    to right,
+    var(--color-orange) 0 12px,
+    transparent 12px 22px
+  );
+  opacity: 0.85;
+  z-index: 0;
+}
+.beat {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+/* Keep the three captions on one baseline even though the middle card is
+   taller than the two device shots. */
+.beat > :global(.reveal) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.beat .caption {
+  margin-top: auto;
+}
+.beatLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-orange-text);
+  text-align: center;
+  margin-bottom: var(--s-4);
+}
+.figure {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* keeps both iPads' bottom edges level with each other */
+  /* Same auto-margin centring the reframe card uses, so all three beats put
+     their midpoint on the same line as the dashed connector. Without it the
+     caption's `margin-top: auto` swallowed all the free space in the device
+     columns only, and the two iPads sat higher than the card between them. */
+  margin-block: auto;
+  /* The screen asset is 440px native. The bezel's padding is a clamp that
+     shrinks on narrow screens, so the device cap has to assume the SMALLEST
+     padding (7px a side) or the screen quietly outgrows its own pixels once
+     the beats stack: 440 + 2*7 = 454. Only binds in the stacked layout. */
+  width: 100%;
+  max-width: 454px;
+  margin-inline: auto;
+}
+/* The device frame (ProductMedia frame="device") owns the bezel and radius;
+   the screen just fills it. */
+.figure > * {
+  width: 100%;
+}
+/* The middle beat holds a card, not a device shot. Centring it in the same
+   band puts its midpoint on the dashed connector alongside the two iPads —
+   and defines the class the markup already asks for, which until now
+   resolved to a literal `undefined` in the class attribute. */
+.beatCenter .reframe {
+  margin-block: auto;
+}
+
+/* ------------------------------------------------- the reframe card (2) */
+.reframe {
+  background: var(--color-card);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-raised);
+  padding: clamp(16px, 1.5vw, 22px);
+  margin-inline: auto;
+  width: 100%;
+  max-width: 100%;
+}
+.reframeHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: var(--s-3);
+}
+.reframeIntro {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--color-text);
+  margin-bottom: var(--s-4);
+}
+.stepList {
+  display: grid;
+  gap: 7px;
+}
+.step {
+  display: grid;
+  grid-template-columns: 26px 1fr 20px;
+  align-items: center;
+  gap: var(--s-3);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-md);
+  padding: 9px 11px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+.stepDone {
+  background: color-mix(in srgb, var(--color-green) 6%, var(--color-white));
+  border-color: color-mix(in srgb, var(--color-green) 22%, var(--color-border-soft));
+}
+.step img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+.checkEmpty {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+}
+.checkDone {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------- caption */
+.caption {
+  position: relative;
+  margin-top: var(--s-8);
+  /* Derived from the icon, never a loose constant: the icon is absolutely
+     positioned and opaque, so any padding smaller than its height paints it
+     straight over the first line of the caption (it was 32px against a 44px
+     icon, covering 38% of line one). */
+  padding-top: calc(var(--caption-icon) + 14px);
+  text-align: center;
+  font-size: var(--step-small);
+  line-height: 1.5;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+.captionIcon {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--caption-icon);
+  height: var(--caption-icon);
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  color: var(--color-navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+}
+
+/* --------------------------------------------------------------- closing */
+.closing {
+  text-align: center;
+  margin-top: clamp(32px, 3.2vw, 48px);
+}
+.closing p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1875rem, 1rem + 0.65vw, 1.5rem);
+  color: var(--color-navy);
+  line-height: 1.35;
+}
+.closingMark {
+  color: var(--color-orange-text);
+  font-style: italic;
+  margin-top: 2px;
+}
+.appDownload {
+  margin-top: var(--s-8);
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 1024px) {
+  .reframe {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 860px) {
+  /* Vertical sequence: 1 Parent -> 2 Mission Accomplished -> 3 Child. */
+  .beats {
+    grid-template-columns: 1fr;
+    gap: var(--s-10);
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+  /* A continuous rule would run straight through the captions once the beats
+     stack, so the horizontal connector gives way to a short vertical segment
+     between each pair. */
+  .beat:nth-child(1) .figure::after,
+  .beat:nth-child(2) .reframe::after {
+    display: none;
+  }
+  .beat:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--s-10) / -1 + 8px);
+    width: 2px;
+    height: 44px;
+    transform: translateX(-50%);
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--color-orange) 0 10px,
+      transparent 10px 18px
+    );
+  }
+  .figure,
+  .reframe {
+    position: relative;
+  }
+  .mountain {
+    top: 40px;
+    width: 200%;
+    transform: translateX(-50%);
+    opacity: 0.55;
+  }
+  .head {
+    text-align: left;
+    margin-inline: auto;
+    max-width: 34rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .caption {
+    margin-top: var(--s-7);
+  }
+}
