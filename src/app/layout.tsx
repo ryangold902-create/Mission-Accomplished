@@ -20,11 +20,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Mission Accomplished — You know your child is capable.",
   description:
-    "Mission Accomplished turns one overwhelming task into steps your child can start and finish — with judgment-free support for you, built by a clinician, mom and founder.",
+    "AI Platform Supporting Neurodivergent Children and their Families",
   openGraph: {
     title: "Mission Accomplished",
     description:
-      "Helping neurodivergent families find a clearer path forward. Start with a free assessment.",
+      "AI Platform Supporting Neurodivergent Children and their Families",
     type: "website",
   },
 };
