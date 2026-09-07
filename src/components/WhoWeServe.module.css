@@ -1,40 +1,172 @@
-/* Full-bleed ecosystem slide between parent support and 24/7 AI support. */
+/* Who we serve — three audience cards replacing the old full-bleed slide. */
 .section {
   background: var(--color-cream);
-  padding-block: var(--section-y-sm);
+  padding-block: var(--section-y);
   overflow: clip;
 }
 
-.frame {
+.head {
+  max-width: 40rem;
+  margin-bottom: clamp(28px, 3vw, 44px);
+}
+.head h2 {
+  margin-bottom: var(--s-5);
+}
+.lede {
+  font-size: var(--step-lede);
+  line-height: 1.58;
+  color: var(--color-text);
+  max-width: 32rem;
+}
+.summit {
+  color: var(--color-orange-text);
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 24px);
+  align-items: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cardWrap {
+  display: flex;
   min-width: 0;
 }
 
-.media {
+.card {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  border-radius: var(--r-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-raised);
   background: var(--color-white);
   border: 1px solid var(--color-border-soft);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
 }
 
+.media {
+  aspect-ratio: 76 / 35;
+  background: var(--color-blue-mist);
+  overflow: hidden;
+}
 .image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
 }
 
-@media (max-width: 480px) {
-  .section {
-    padding-inline: 0;
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: clamp(var(--s-5), 1.6vw, var(--s-7));
+}
+.title {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9375rem, 0.88rem + 0.2vw, 1.0625rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  line-height: 1.25;
+  margin-bottom: var(--s-2);
+}
+.roles {
+  font-size: var(--step-small);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--color-navy) 72%, #4a7ab0);
+  margin-bottom: var(--s-4);
+  line-height: 1.4;
+}
+.blurb {
+  font-size: var(--step-body);
+  line-height: 1.55;
+  color: var(--color-text);
+  margin-bottom: var(--s-6);
+  text-wrap: pretty;
+}
+
+.needsLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  margin-bottom: var(--s-3);
+}
+.needs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-2) var(--s-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.needs li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+.tick {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: color-mix(in srgb, #2f6fad 14%, transparent);
+  position: relative;
+  flex: none;
+  margin-top: 2px;
+}
+.tick::after {
+  content: "";
+  position: absolute;
+  left: 4.5px;
+  top: 2.5px;
+  width: 3.5px;
+  height: 6.5px;
+  border: solid #2f6fad;
+  border-width: 0 1.6px 1.6px 0;
+  transform: rotate(45deg);
+}
+
+.closing {
+  margin-top: clamp(28px, 3vw, 44px);
+  text-align: center;
+  max-width: 36rem;
+  margin-inline: auto;
+}
+.closing p {
+  font-size: var(--step-lede);
+  line-height: 1.55;
+  color: var(--color-navy);
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 26rem;
+    margin-inline: auto;
   }
-  .frame {
-    width: 100%;
-    max-width: none;
-    padding-inline: 0;
+  .needs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .media {
-    border-radius: 0;
-    border-inline: 0;
+}
+
+@media (max-width: 420px) {
+  .needs {
+    grid-template-columns: 1fr;
+  }
+  .roles {
+    font-size: 0.8125rem;
   }
 }

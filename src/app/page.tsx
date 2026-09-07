@@ -5,9 +5,9 @@ import InsightCarousel from "@/components/InsightCarousel";
 import HowItWorks from "@/components/HowItWorks";
 import ParentCompass from "@/components/ParentCompass";
 import WhoWeServe from "@/components/WhoWeServe";
-import AiSupport from "@/components/AiSupport";
 import TryTonight from "@/components/TryTonight";
 import Pricing from "@/components/Pricing";
+import AiSupport from "@/components/AiSupport";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -21,9 +21,9 @@ export default function Home() {
         <SummitJourney />
         <ParentCompass />
         <WhoWeServe />
-        <AiSupport />
         <TryTonight />
         <Pricing />
+        <AiSupport />
       </main>
       <Footer />
     </>

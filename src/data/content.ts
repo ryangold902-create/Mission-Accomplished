@@ -277,9 +277,75 @@ export const pricingPath = [
   { id: "summit", label: "Summit", icon: "summit" },
 ] as const;
 
-/* -- AI support (client-approved public claims) ------------------------- */
-export const aiSupportBadges = [
-  "Proprietary",
-  "Professionally trained by a CCC-SLP",
-  "Available 24/7",
-] as const;
+/* -- Who we serve (parents / teachers / therapists) --------------------- */
+export interface AudienceCard {
+  id: string;
+  title: string;
+  roles: string;
+  blurb: string;
+  needs: string[];
+  image: { src: string; width: number; height: number; alt: string };
+}
+
+export const whoWeServeAudiences: AudienceCard[] = [
+  {
+    id: "parents",
+    title: "Parents & Caregivers",
+    roles: "Moms · Dads · Guardians",
+    blurb: "Need clarity, confidence, and support between appointments.",
+    needs: [
+      "Real answers",
+      "Daily guidance",
+      "Less overwhelm",
+      "Better communication",
+      "Measurable progress",
+      "Hope",
+    ],
+    image: {
+      src: "/assets/who-we-serve-parents.webp",
+      width: 760,
+      height: 350,
+      alt: "A parent and child smiling together while looking at a tablet.",
+    },
+  },
+  {
+    id: "teachers",
+    title: "Teachers & Educators",
+    roles: "Teachers · Special Education · School Staff",
+    blurb: "Need visibility into what is working beyond the classroom.",
+    needs: [
+      "Shared goals",
+      "Better coordination",
+      "Progress visibility",
+      "Classroom strategies",
+      "Faster interventions",
+      "Consistent support",
+    ],
+    image: {
+      src: "/assets/who-we-serve-teachers.webp",
+      width: 760,
+      height: 350,
+      alt: "A teacher and student smiling together at a classroom desk.",
+    },
+  },
+  {
+    id: "therapists",
+    title: "Therapists & Clinicians",
+    roles: "SLPs · OTs · Behavioral Specialists",
+    blurb: "Need continuity between sessions and real-world implementation.",
+    needs: [
+      "Parent alignment",
+      "School alignment",
+      "Better outcomes",
+      "Activity tracking",
+      "Data visibility",
+      "Long-term progress",
+    ],
+    image: {
+      src: "/assets/who-we-serve-therapists.webp",
+      width: 760,
+      height: 350,
+      alt: "A clinician and child smiling while playing with stacking rings.",
+    },
+  },
+];

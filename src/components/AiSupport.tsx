@@ -1,35 +1,40 @@
-import { aiSupportBadges } from "@/data/content";
+import AppDownload from "./AppDownload";
+import PrimaryCTA from "./PrimaryCTA";
 import Reveal from "./Reveal";
 import styles from "./AiSupport.module.css";
 
-/** Parent homepage — 24/7 AI support (client-approved claims). */
+/**
+ * Closes the parents page after pricing: 24/7 support framing, then the
+ * shared assessment / app-download panel.
+ */
 export default function AiSupport() {
   return (
     <section
-      className={`${styles.section} seam-t`}
-      style={{ "--seam-color": "var(--color-blue-mist)" } as React.CSSProperties}
+      className={styles.section}
       id="ai-support"
       aria-labelledby="ai-support-title"
     >
       <div className="container">
-        <Reveal className={styles.inner}>
-          <p className="eyebrow">24/7 AI Support</p>
+        <Reveal className={styles.head}>
           <h2 className="h1" id="ai-support-title">
-            Support that doesn&rsquo;t clock out.
-            <br />
-            <em className="serif-italic">Real help at 2 a.m., not a callback on Monday.</em>
+            Not sure where to start?
+            <em className="serif-italic">Support is always within reach.</em>
           </h2>
           <p className={styles.body}>
-            Mission Accomplished&rsquo;s proprietary AI support is live in the app and professionally
-            trained by a licensed speech-language pathologist (CCC-SLP). When your child is melting down
-            in the middle of the night, or your therapist is off the clock, you get calm, expert-backed
-            guidance in the moment, not days later.
+            When you&rsquo;re stuck on what to do next, Mission Accomplished gives you 24/7
+            AI-powered support to help you understand what may be behind the challenge and find a
+            practical next step. Whether it&rsquo;s morning, bedtime, or 2 AM, you don&rsquo;t have
+            to figure it out alone.
           </p>
-          <ul className={styles.badges} aria-label="AI support highlights">
-            {aiSupportBadges.map((badge) => (
-              <li key={badge}>{badge}</li>
-            ))}
-          </ul>
+        </Reveal>
+
+        <Reveal className={styles.final} delay={80}>
+          <div className={styles.finalCta}>
+            <PrimaryCTA microcopy="default" align="center" />
+          </div>
+
+          {/* Secondary path — stays quiet next to the assessment CTA. */}
+          <AppDownload variant="prompt" align="center" className={styles.member} />
         </Reveal>
       </div>
     </section>

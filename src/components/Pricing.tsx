@@ -1,8 +1,6 @@
 import { pricingPlans, pricingPath } from "@/data/content";
-import AppDownload from "./AppDownload";
 import { pathIcons, People } from "./Icons";
 import PricingCard from "./PricingCard";
-import PrimaryCTA from "./PrimaryCTA";
 import Reveal from "./Reveal";
 import styles from "./Pricing.module.css";
 
@@ -52,27 +50,6 @@ export default function Pricing() {
           <p>
             Therapists invited by families receive free guest access — no subscription required.
           </p>
-        </Reveal>
-
-        {/* ------------------------------------------------- final CTA ---- */}
-        <Reveal className={styles.final}>
-          <div className={styles.finalCopy}>
-            <h3 className={styles.finalTitle}>Not sure where to start?</h3>
-            <p>
-              That&rsquo;s exactly what the free assessment is for. Tell us what feels hardest right
-              now, and we&rsquo;ll help you understand the next step.
-            </p>
-          </div>
-
-          <div className={styles.finalCta}>
-            <PrimaryCTA microcopy="default" align="center" />
-          </div>
-
-          {/* V3.1: was "Already part of Mission Accomplished?", which implied the
-              app is only for existing customers. AppDownload's prompt variant
-              reframes it as a second path in rather than a returning-user
-              shortcut, while staying secondary to the assessment beside it. */}
-          <AppDownload variant="prompt" align="center" className={styles.member} />
         </Reveal>
       </div>
     </section>
