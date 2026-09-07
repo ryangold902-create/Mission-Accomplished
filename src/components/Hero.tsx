@@ -1,5 +1,4 @@
 import { founder } from "@/data/site";
-import AppDownload from "./AppDownload";
 import PrimaryCTA from "./PrimaryCTA";
 import ProductMedia from "./ProductMedia";
 import Reveal from "./Reveal";
@@ -43,13 +42,6 @@ export default function Hero() {
           </p>
 
           <PrimaryCTA microcopy="default" className={styles.cta} />
-
-          {/* Quiet secondary path — the assessment stays the only solid
-              button; this is a muted line + text link, never a second CTA. */}
-          <div className={styles.appTeaser}>
-            <p className="small muted">Already want to jump in?</p>
-            <AppDownload variant="link" />
-          </div>
 
           <div className={styles.founder}>
             {/* eslint-disable-next-line @next/next/no-img-element */}

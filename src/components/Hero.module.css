@@ -45,16 +45,7 @@
   margin-bottom: var(--s-8);
 }
 .cta {
-  /* Tight — the quiet app-download line now sits directly under this button's
-     own microcopy; .appTeaser carries the larger gap down to the founder row. */
-  margin-bottom: var(--s-3);
-}
-
-.appTeaser {
   margin-bottom: var(--s-8);
-}
-.appTeaser p:first-child {
-  margin-bottom: var(--s-2);
 }
 
 .founder {

@@ -35,6 +35,9 @@
 .copy {
   max-width: 28rem;
 }
+.copy h2 {
+  font-size: var(--step-kids-section);
+}
 .did {
   margin-top: var(--s-4);
   font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
