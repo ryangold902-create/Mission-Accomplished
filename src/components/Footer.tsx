@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { navigationItems, legalItems, brand, type AudienceId } from "@/data/site";
 import AppDownload from "./AppDownload";
 import MountainLine from "./MountainLine";
@@ -11,6 +14,11 @@ import styles from "./Footer.module.css";
  */
 export default function Footer({ audience = "parents" }: { audience?: AudienceId }) {
   const isKids = audience === "kids";
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const sectionHref = (href: string) =>
+    href.startsWith("#") && !onHome ? `/${href}` : href;
+
   return (
     <footer className={`on-navy ${styles.footer}`}>
       <MountainLine />
@@ -35,7 +43,7 @@ export default function Footer({ audience = "parents" }: { audience?: AudienceId
                 <>
                   {navigationItems.map((item) => (
                     <li key={item.href}>
-                      <a className={styles.navLink} href={item.href}>
+                      <a className={styles.navLink} href={sectionHref(item.href)}>
                         {item.label}
                       </a>
                     </li>

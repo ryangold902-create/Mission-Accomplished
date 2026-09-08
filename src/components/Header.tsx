@@ -14,6 +14,11 @@ export default function Header() {
   const pathname = usePathname();
   // The header is shared; only its primary action changes with the audience.
   const isKids = audienceFromPath(pathname) === "kids";
+  const onHome = pathname === "/";
+  /** Hash nav from non-home routes must land on the parents homepage sections. */
+  const sectionHref = (href: string) =>
+    href.startsWith("#") && (isKids || !onHome) ? `/${href}` : href;
+  const homeHref = isKids || !onHome ? "/" : "#top";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -93,7 +98,7 @@ export default function Header() {
                 <li key={item.href}>
                   <a
                     className={styles.panelLink}
-                    href={isKids ? `/${item.href}` : item.href}
+                    href={sectionHref(item.href)}
                     onClick={() => setOpen(false)}
                   >
                     {item.label}
@@ -134,7 +139,7 @@ export default function Header() {
       className={`${styles.header} ${scrolled ? styles.compact : ""} ${open ? styles.menuOpen : ""}`}
     >
       <div className={styles.inner}>
-        <a href={isKids ? "/" : "#top"} className={styles.logo} aria-label={`${brand.name} — home`}>
+        <a href={homeHref} className={styles.logo} aria-label={`${brand.name} — home`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/assets/logo-navy.png" alt="" width={340} height={191} />
         </a>
@@ -143,7 +148,7 @@ export default function Header() {
           <ul className={styles.navList}>
             {navigationItems.map((item) => (
               <li key={item.href}>
-                <a className={styles.navLink} href={isKids ? `/${item.href}` : item.href}>
+                <a className={styles.navLink} href={sectionHref(item.href)}>
                   {item.label}
                 </a>
               </li>

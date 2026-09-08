@@ -105,7 +105,7 @@ export const navigationItems: NavItem[] = [
 ];
 
 export const legalItems: NavItem[] = [
-  { label: "Privacy", href: "/privacy" }, // PLACEHOLDER: legal pages not yet written
+  { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
   { label: "Accessibility", href: "/accessibility" },
 ];
