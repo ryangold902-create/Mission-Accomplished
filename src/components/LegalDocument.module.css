@@ -86,14 +86,21 @@
 
 .plans {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--s-4);
   margin: 0 0 var(--s-6);
 }
 .plan {
-  background: var(--color-white);
-  border: 1px solid var(--color-border-soft);
   border-radius: var(--r-md);
   padding: var(--s-5);
+}
+.planFamily {
+  background: #fff9ee;
+  border: 1px solid #feebc8;
+}
+.planProfessional {
+  background: #ebf8ff;
+  border: 1px solid #bee3f8;
 }
 .planName {
   font-weight: 700;
@@ -102,14 +109,23 @@
 }
 .planPrice {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: clamp(1.5rem, 1.25rem + 0.8vw, 1.875rem);
+  line-height: 1.1;
   color: var(--color-navy);
-  margin: 0 0 var(--s-2);
+  margin: 0 0 var(--s-3);
+}
+.planPeriod {
+  font-family: var(--font-sans);
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-left: 0.15em;
 }
 .planDetail {
   font-size: var(--step-small);
   color: var(--color-text-muted);
   margin: 0;
+  line-height: 1.45;
 }
 
 .contact {
@@ -125,6 +141,9 @@
 }
 
 @media (max-width: 640px) {
+  .plans {
+    grid-template-columns: 1fr;
+  }
   .body ul,
   .body ol {
     padding-left: 1.1rem;

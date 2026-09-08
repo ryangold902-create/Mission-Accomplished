@@ -65,15 +65,21 @@ export default function TermsPage() {
 
       <h2>4. Subscription and Billing</h2>
       <div className={styles.plans}>
-        <div className={styles.plan}>
+        <div className={`${styles.plan} ${styles.planFamily}`}>
           <p className={styles.planName}>Family Plan</p>
-          <p className={styles.planPrice}>$29/month or $249/year</p>
-          <p className={styles.planDetail}>Up to 4 children · 14-day free trial</p>
+          <p className={styles.planPrice}>
+            $29<span className={styles.planPeriod}>/month</span>
+          </p>
+          <p className={styles.planDetail}>or $249/year · Up to 4 children · 14-day free trial</p>
         </div>
-        <div className={styles.plan}>
+        <div className={`${styles.plan} ${styles.planProfessional}`}>
           <p className={styles.planName}>Professional Plan</p>
-          <p className={styles.planPrice}>$39/month or $329/year</p>
-          <p className={styles.planDetail}>Unlimited client families · 14-day free trial</p>
+          <p className={styles.planPrice}>
+            $39<span className={styles.planPeriod}>/month</span>
+          </p>
+          <p className={styles.planDetail}>
+            or $329/year · Unlimited client families · 14-day free trial
+          </p>
         </div>
       </div>
       <h3>Billing Terms</h3>
