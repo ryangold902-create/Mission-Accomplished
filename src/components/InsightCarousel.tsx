@@ -51,7 +51,12 @@ export default function InsightCarousel() {
                 so the nav item scrolls to the founder moment on the page. */}
             <figure className={styles.quote} id="our-story">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={founder.portrait} alt="" width={468} height={655} />
+              <img
+                src={founder.portrait}
+                alt={`${founder.name}, ${founder.credentials}, founder of Mission Accomplished`}
+                width={468}
+                height={655}
+              />
               <figcaption>
                 Parents often ask {founder.name.split(" ")[0]}:
                 <em>&ldquo;How did you know that?&rdquo;</em>

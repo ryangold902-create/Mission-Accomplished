@@ -96,7 +96,7 @@ export default function HowItWorks() {
                   {reframeSteps.map((step, i) => (
                     <li key={step.text} className={`${styles.step} ${i === 0 ? styles.stepDone : ""}`}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={step.icon} alt="" width={72} height={72} aria-hidden="true" />
+                      <img src={step.icon} alt={step.iconAlt} width={72} height={72} />
                       <span>{step.text}</span>
                       <Check done={i === 0} />
                     </li>

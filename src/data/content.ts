@@ -88,11 +88,31 @@ export const insightCarouselData: Insight[] = [
 
 /* -- p.6  How it works -------------------------------------------------- */
 export const reframeSteps = [
-  { icon: "/assets/step-basket.png", text: "Pop any clothes from the floor into the laundry basket" },
-  { icon: "/assets/step-books.png", text: "Put 5 books back on the shelf or in a neat stack" },
-  { icon: "/assets/step-teddy.png", text: "Give your stuffies and toys a cozy spot to rest" },
-  { icon: "/assets/step-bed.png", text: "Smooth out your blanket and fluff your pillow" },
-  { icon: "/assets/step-sparkle.png", text: "Take one last look and pick your favorite tidy spot to show off" },
+  {
+    icon: "/assets/step-basket.png",
+    iconAlt: "Laundry basket",
+    text: "Pop any clothes from the floor into the laundry basket",
+  },
+  {
+    icon: "/assets/step-books.png",
+    iconAlt: "Stack of books",
+    text: "Put 5 books back on the shelf or in a neat stack",
+  },
+  {
+    icon: "/assets/step-teddy.png",
+    iconAlt: "Stuffed animals and toys",
+    text: "Give your stuffies and toys a cozy spot to rest",
+  },
+  {
+    icon: "/assets/step-bed.png",
+    iconAlt: "Bed with blanket and pillow",
+    text: "Smooth out your blanket and fluff your pillow",
+  },
+  {
+    icon: "/assets/step-sparkle.png",
+    iconAlt: "Sparkle highlight",
+    text: "Take one last look and pick your favorite tidy spot to show off",
+  },
 ];
 
 /* -- pp.8–12  Try one tonight ------------------------------------------- */

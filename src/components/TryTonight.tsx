@@ -155,7 +155,7 @@ export default function TryTonight() {
                   <img
                     className={styles.illus}
                     src={scenario.illustration}
-                    alt={unlocked ? scenario.alt : ""}
+                    alt={scenario.alt}
                     loading="lazy"
                     decoding="async"
                   />
