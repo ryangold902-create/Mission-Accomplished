@@ -14,7 +14,7 @@ export default function WhoWeServe() {
         <Reveal className={styles.head}>
           <p className="eyebrow">Who we serve</p>
           <h2 className="h1" id="who-we-serve-title">
-            Different roles.
+            {"Different roles. "}
             <em className="serif-italic">Same mission.</em>
           </h2>
           <p className={styles.lede}>

@@ -44,7 +44,7 @@ export default function HowItWorks() {
         <Reveal className={styles.head}>
           <p className="eyebrow">How it works</p>
           <h2 className="h1" id="hiw-title">
-            One overwhelming task.
+            {"One overwhelming task. "}
             <em className="serif-italic">One clear next step.</em>
           </h2>
           <p className={styles.lede}>

@@ -29,7 +29,7 @@ export default function Hero() {
           </p>
 
           <h1 className="display">
-            You know your child is capable.
+            {"You know your child is capable. "}
             <em className="serif-italic">So why does everything feel so hard?</em>
           </h1>
 

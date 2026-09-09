@@ -137,7 +137,7 @@ export default function InsightCarousel() {
 
       <Reveal className={styles.closing}>
         <p>
-          When you understand what may be underneath,
+          {"When you understand what may be underneath, "}
           <em className="serif-italic">you can change what happens next.</em>
         </p>
         <ArrowDown className={styles.arrow} size={20} />

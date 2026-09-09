@@ -17,7 +17,7 @@ export default function ParentCompass() {
         <Reveal className={styles.copy}>
           <p className="eyebrow">It starts with you</p>
           <h2 className="h1" id="compass-title">
-            Before we help your child,
+            {"Before we help your child, "}
             <em className="serif-italic">we help you.</em>
           </h2>
           <p className={styles.secondary}>

@@ -16,7 +16,8 @@ export default function SummitJourney() {
         <Reveal className={styles.copy}>
           <p className="eyebrow">Where we&rsquo;re headed</p>
           <h2 className="h1" id="summit-title">
-            The goal isn&rsquo;t<br className="br-lg" /> perfect behavior.
+            The goal isn&rsquo;t<br className="br-lg" />
+            {" perfect behavior. "}
             <em className="serif-italic">It&rsquo;s more independence.</em>
           </h2>
           <span className={styles.rule} aria-hidden="true" />

@@ -17,7 +17,7 @@ export default function AiSupport() {
       <div className="container">
         <Reveal className={styles.head}>
           <h2 className="h1" id="ai-support-title">
-            Not sure where to start?
+            {"Not sure where to start? "}
             <em className="serif-italic">Support is always within reach.</em>
           </h2>
           <p className={styles.body}>
