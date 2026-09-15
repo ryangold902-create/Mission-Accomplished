@@ -47,25 +47,27 @@ export const ACTIONS: Record<ActionKey, CtaDefinition> = {
     shortLabel: "Get the App",
     navLabel: "Get the App",
     label: "Download Mission Accomplished",
-    href: "#get-the-app",
+    href: "https://app.missionaccomplished.app/",
     microcopy: "Free to download · iOS and Android",
     microcopyAlt: "No credit card required. Free to try.",
-    external: false,
+    external: true,
   },
 };
 
 export const primaryCta: CtaDefinition = ACTIONS[PRIMARY_ACTION];
 
-/** App-store links stay secondary while the funnel is assessment-first. */
+/** App entry links — all point at the live app until native store URLs land. */
+export const APP_URL = "https://app.missionaccomplished.app/";
+
 export const appStores = {
   ios: {
     label: "Download on the App Store",
-    href: "#", // PLACEHOLDER: App Store listing URL
+    href: APP_URL,
     image: "/assets/badge-appstore.png",
   },
   android: {
     label: "Get it on Google Play",
-    href: "#", // PLACEHOLDER: Google Play listing URL
+    href: APP_URL,
     image: "/assets/badge-googleplay.png",
   },
 };
@@ -81,8 +83,8 @@ export const appStores = {
 export const appAccess = {
   /** Quiet inline text link. */
   linkLabel: "Download the app",
-  /** Where the text link points until a real store-router URL exists. */
-  href: "#get-the-app", // PLACEHOLDER: app landing / smart banner URL
+  /** Opens the live Mission Accomplished app. */
+  href: APP_URL,
   /** Lead-in used where badges follow a product explanation. */
   intro: "See the real experience in the app.",
   /** Pricing panel framing — the app is for everyone, not just members. */

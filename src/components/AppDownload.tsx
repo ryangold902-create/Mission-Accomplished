@@ -23,7 +23,12 @@ function Badges() {
     <ul className={styles.badges}>
       {[appAccess.stores.ios, appAccess.stores.android].map((store) => (
         <li key={store.label}>
-          <a href={store.href} aria-label={store.label}>
+          <a
+            href={store.href}
+            aria-label={store.label}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={store.image} alt={store.label} width={180} height={60} loading="lazy" decoding="async" />
           </a>
@@ -72,7 +77,12 @@ export default function AppDownload({
   return (
     <p className={cx(styles.linkRow, align === "center" && styles.center, className)}>
       {prefix && <span className={styles.prefix}>{prefix} </span>}
-      <a className={styles.link} href={appAccess.href}>
+      <a
+        className={styles.link}
+        href={appAccess.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {appAccess.linkLabel}
         <ArrowRight size={15} />
       </a>
