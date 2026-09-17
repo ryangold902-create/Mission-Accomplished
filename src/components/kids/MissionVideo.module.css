@@ -47,10 +47,8 @@
   background: var(--color-white);
 }
 
-/* Decorative "this plays" affordance, centred on the still poster — see the
-   component doc for why it is hidden from assistive tech. Sized as a clamp
-   rather than a fixed px so it stays proportional on the very large stage a
-   full-width video container renders at on desktop. */
+/* Centre play affordance on the still / paused video. Sized as a clamp so
+   it stays proportional on the large desktop stage. */
 .playOverlay {
   position: absolute;
   top: 50%;
@@ -65,7 +63,14 @@
   background: color-mix(in srgb, var(--color-navy) 82%, transparent);
   color: #fff;
   box-shadow: var(--shadow-raised);
-  pointer-events: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+button.playOverlay:hover,
+button.playOverlay:focus-visible {
+  background: var(--color-navy);
 }
 .playOverlay svg {
   /* Optically centre the play glyph inside the circle — it isn't symmetric. */

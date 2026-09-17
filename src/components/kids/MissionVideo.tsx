@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScrollableRegion } from "./useScrollableRegion";
 import styles from "./MissionVideo.module.css";
 
@@ -33,9 +33,9 @@ interface Props {
  * recording inside the same frame, with the same styling, caption and
  * surrounding layout — nothing else changes.
  *
- * Video is muted, inline and looping, never autoplays audio, and is not
- * rendered at all under `prefers-reduced-motion` (the poster is shown
- * instead, so a reduced-motion visitor never downloads it).
+ * Video is muted, inline, never autoplays, and is not rendered at all under
+ * `prefers-reduced-motion` (the poster is shown instead). A centre play
+ * button starts playback; native browser controls stay available throughout.
  */
 export default function MissionVideo({
   poster,
@@ -44,6 +44,8 @@ export default function MissionVideo({
   className = "",
 }: Props) {
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const stageRef = useScrollableRegion<HTMLDivElement>("Product screen — scrolls sideways");
 
   useEffect(() => {
@@ -55,6 +57,17 @@ export default function MissionVideo({
   }, []);
 
   const hasVideo = Boolean(sources?.mp4 || sources?.webm) && !reduceMotion;
+
+  const play = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+    try {
+      await video.play();
+      setPlaying(true);
+    } catch {
+      setPlaying(false);
+    }
+  };
 
   return (
     /* A plain div, not <figure>: a figcaption would become the accessible name
@@ -73,20 +86,35 @@ export default function MissionVideo({
       {hasVideo ? (
         <div className={styles.stage}>
           <video
+            ref={videoRef}
             className={styles.video}
             poster={poster.src}
             width={poster.width}
             height={poster.height}
-            autoPlay
             muted
             loop
             playsInline
             controls
+            preload="metadata"
             aria-label={poster.alt}
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
           >
             {sources?.webm && <source src={sources.webm} type="video/webm" />}
             {sources?.mp4 && <source src={sources.mp4} type="video/mp4" />}
           </video>
+          {!playing && (
+            <button
+              type="button"
+              className={styles.playOverlay}
+              onClick={play}
+              aria-label={`Play video: ${poster.alt}`}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8 5.2v13.6L19 12z" />
+              </svg>
+            </button>
+          )}
         </div>
       ) : (
         <div
@@ -94,9 +122,8 @@ export default function MissionVideo({
           className={styles.stage}
           style={{ "--shot-max": `${poster.width}px` } as React.CSSProperties}
         >
-          {/* Decorative "this plays" affordance — not a real control, so it
-              never doubles up with the <video>'s native controls once a
-              recording lands. */}
+          {/* Decorative "this plays" affordance — not a real control until a
+              recording is supplied. */}
           <span className={styles.playOverlay} aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5.2v13.6L19 12z" />

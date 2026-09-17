@@ -35,8 +35,7 @@ export default function OneStepAtATime() {
                 height: 280,
                 alt: "The Clean Room challenge in the Mission Accomplished kids app: five steps, none complete yet, starting with “Pop any clothes from the floor into the laundry basket”.",
               }}
-              /* PLACEHOLDER: drop the real recording in here — nothing else changes.
-                 sources={{ mp4: "/assets/kids/clean-room.mp4", webm: "/assets/kids/clean-room.webm" }} */
+              sources={{ mp4: "/assets/kids/kids-one-step-at-a-time-video.mp4" }}
             />
           </Reveal>
 
