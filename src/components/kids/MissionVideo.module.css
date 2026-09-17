@@ -83,10 +83,10 @@ button.playOverlay:focus-visible {
   height: auto;
   border-radius: var(--r-lg);
   background: var(--color-navy);
-  /* Matches the supplied poster's own proportions (950x280) so the stage is
-     already the right shape before a real recording replaces the still —
-     no layout jump when `sources` is supplied later. */
-  aspect-ratio: 950 / 280;
+  /* Real recording is 912×480 — same ratio on desktop and mobile so the
+     player scales with the viewport instead of a fixed poster crop. */
+  aspect-ratio: 912 / 480;
+  object-fit: contain;
 }
 
 /* Below this width the wide challenge sheet would compress its step rows to

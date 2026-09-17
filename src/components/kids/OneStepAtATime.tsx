@@ -8,9 +8,8 @@ import styles from "./OneStepAtATime.module.css";
 /**
  * Kids reference 03 — the product demo.
  *
- * One large video container holds the Clean Room challenge screen — the
- * poster is a real capture. Supplying `sources` to <MissionVideo> replaces
- * it with the real screen recording without touching this layout.
+ * One large video container holds the Clean Room challenge recording.
+ * The still is only used when video cannot play (e.g. reduced motion).
  */
 export default function OneStepAtATime() {
   return (

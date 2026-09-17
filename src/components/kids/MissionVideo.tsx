@@ -17,7 +17,7 @@ interface Shot {
 }
 
 interface Props {
-  /** Real product screen shown until a recording is supplied. Also the poster. */
+  /** Still shown when there is no recording, or under prefers-reduced-motion. */
   poster: Shot;
   sources?: VideoSources;
   /** Caption shown above the media — this is the component's accessible label. */
@@ -33,9 +33,10 @@ interface Props {
  * recording inside the same frame, with the same styling, caption and
  * surrounding layout — nothing else changes.
  *
- * Video is muted, inline, never autoplays, and is not rendered at all under
- * `prefers-reduced-motion` (the poster is shown instead). A centre play
- * button starts playback; native browser controls stay available throughout.
+ * Video is muted, inline, never autoplays, has no poster thumbnail, and is
+ * not rendered at all under `prefers-reduced-motion` (the still is shown
+ * instead). A centre play button starts playback; native browser controls
+ * stay available throughout.
  */
 export default function MissionVideo({
   poster,
@@ -88,9 +89,8 @@ export default function MissionVideo({
           <video
             ref={videoRef}
             className={styles.video}
-            poster={poster.src}
-            width={poster.width}
-            height={poster.height}
+            width={912}
+            height={480}
             muted
             loop
             playsInline
